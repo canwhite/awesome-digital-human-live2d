@@ -1,0 +1,1 @@
+from .index import load_and_replace

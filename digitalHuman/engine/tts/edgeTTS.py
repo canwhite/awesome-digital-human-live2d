@@ -15,6 +15,7 @@ from digitalHuman.utils.audio import mp3ToWav
 __all__ = ["EdgeAPI"]
 
 
+# 主要是把text转化为音频作为输出存在
 @TTSEngines.register("EdgeAPI")
 class EdgeAPI(BaseEngine):
     def checkKeys(self) -> List[str]:

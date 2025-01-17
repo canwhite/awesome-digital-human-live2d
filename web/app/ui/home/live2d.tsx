@@ -7,6 +7,7 @@ import { CharacterManager } from "@/app/lib/character"
 import { useCharacterStore, useBackgroundStore } from "@/app/lib/store";
 
 export default function Live2d() {
+    
     const { character } = useCharacterStore();
     const { background } = useBackgroundStore();
     const canvasRef = useRef<HTMLCanvasElement>(null);

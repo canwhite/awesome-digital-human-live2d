@@ -19,7 +19,7 @@ class OpenaiAPI(BaseEngine):
     def checkKeys(self) -> List[str]:
         return ["SK", "MODEL", "LLM_URL"]
         
-    
+    # 选择了，最终都要跑到这儿
     async def run(self, input: TextMessage, **kwargs) -> Optional[TextMessage]:
         try: 
             payload = json.dumps({

@@ -9,6 +9,7 @@ SERVER:
     ASR: 
       SUPPORT_LIST: [ "baiduAPI.yaml", "googleAPI.yaml", "difyAPI.yaml" ]
       DEFAULT: "googleAPI.yaml"
+    #默认默认的LLM为openaiAPI.yaml
     LLM: 
       SUPPORT_LIST: [ "openaiAPI.yaml", "baiduAPI.yaml" ]
       DEFAULT: "openaiAPI.yaml"
@@ -16,5 +17,8 @@ SERVER:
       SUPPORT_LIST: [ "edgeAPI.yaml", "baiduAPI.yaml", "difyAPI.yaml" ]
       DEFAULT: "edgeAPI.yaml"
   AGENTS: 
+    #设置openaiAgent.yaml为默认的agent
     SUPPORT_LIST: [ "repeaterAgent.yaml", "difyAgent.yaml", "fastgptAgent.yaml", "openaiAgent.yaml" ]
-    DEFAULT: "repeaterAgent.yaml"
+    DEFAULT: "openaiAgent.yaml"
+  
+

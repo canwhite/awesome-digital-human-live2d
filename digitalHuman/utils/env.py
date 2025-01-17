@@ -7,10 +7,14 @@
 import os
 import warnings
 
+# Define the root path of the project
 ROOT_PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 CONFIG_ROOT_PATH = os.path.join(ROOT_PATH, "configs")
 CONFIG_TEMPLATE_FILE = os.path.join(CONFIG_ROOT_PATH, "config_template.yaml")
+
 CONFIG_FILE = os.path.join(CONFIG_ROOT_PATH, "config.yaml")
+
+# 如果config_full_path is None, use the default config file
 if not os.path.exists(CONFIG_FILE):
     CONFIG_FILE = CONFIG_TEMPLATE_FILE
 LOG_PATH = os.path.join(ROOT_PATH, "logs")

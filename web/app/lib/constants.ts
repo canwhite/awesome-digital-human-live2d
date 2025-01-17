@@ -1,3 +1,4 @@
+// 一些常用默认值
 export const PROJ_NAME = "Awesome Digital Human";
 export const PROJ_DESC = "Awesome Digital Human";
 export const HEART_BEAT_ALERT = "Soul is death!";

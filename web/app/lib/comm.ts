@@ -1,4 +1,24 @@
 import * as API from '@/app/lib/api';
+/**
+ * 这个文件主要包含了一些通用的工具函数和通信类
+ * 
+ * 主要功能包括：
+ * 1. blobToBase64: 将Blob对象转换为Base64字符串
+ * 2. base64ToArrayBuffer: 将Base64字符串转换为ArrayBuffer
+ * 3. Comm类：实现了一个单例模式的通信类
+ * 
+ * 这些工具通常用于以下场景：
+ * 1. 文件处理：当需要将文件转换为Base64格式进行传输或存储时
+ * 2. 数据转换：在需要将二进制数据转换为字符串格式时
+ * 3. 网络通信：Comm类可以用于管理应用中的网络请求
+ * 4. 音视频处理：在处理音频、视频等二进制数据时
+ * 
+ * 特别适用于：
+ * - 需要在前端处理二进制数据的场景
+ * - 需要实现单例模式的网络通信管理
+ * - 需要将文件数据转换为可传输格式的场景
+ */
+
 
 function blobToBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {

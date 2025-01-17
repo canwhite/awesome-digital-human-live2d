@@ -13,6 +13,24 @@ from .core import AgentFactory
 
 __all__ = ["AgentPool"]
 
+"""
+AgentPool 是一个单例模式的代理池管理类，用于管理和维护不同类型的Agent实例。
+
+主要功能包括：
+1. 单例模式：通过__new__方法实现单例，确保全局只有一个AgentPool实例
+2. 初始化管理：通过_init标志位控制初始化状态
+3. 代理池管理：使用字典_pool存储所有Agent实例
+4. 配置加载：通过setup方法根据配置文件初始化所有支持的Agent
+5. 实例获取：通过get方法按名称获取指定Agent实例
+6. 列表查询：通过list方法获取所有已加载的Agent名称列表
+
+使用示例：
+    config = load_config()  # 加载配置文件
+    agent_pool = AgentPool()  # 获取单例实例
+    agent_pool.setup(config)  # 初始化代理池
+    agent = agent_pool.get("OpenaiAgent")  # 获取指定Agent
+"""
+
 class AgentPool():
     singleLock = RLock()
     _init = False

@@ -13,6 +13,7 @@ from digitalHuman.utils import config
 from digitalHuman.utils import TextMessage
 from digitalHuman.engine import EnginePool, EngineType
 
+# 导出router就ok
 router = APIRouter()
 enginePool = EnginePool()
 

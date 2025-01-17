@@ -8,6 +8,37 @@ import { ConfirmAlert } from "@/app/ui/common/alert";
 import { AUDIO_SUPPORT_ALERT, AI_THINK_MESSAGE } from "@/app/lib/constants";
 import { Comm } from "@/app/lib/comm";
 import { CharacterManager } from "@/app/lib/character";
+
+/**
+ * js-audio-recorder 是一个用于在浏览器中进行音频录制的JavaScript库
+ * 
+ * 主要功能：
+ * 1. 支持WAV格式的音频录制
+ * 2. 提供简单的API进行录音控制
+ * 3. 支持获取录音数据
+ * 4. 支持录音时长限制
+ * 
+ * 常用API：
+ * - start(): 开始录音
+ * - stop(): 停止录音
+ * - pause(): 暂停录音
+ * - resume(): 恢复录音
+ * - getWAVBlob(): 获取WAV格式的Blob对象
+ * - getWAVData(): 获取WAV格式的二进制数据
+ * - getPlayDuration(): 获取录音时长
+ * 
+ * 使用场景：
+ * 1. 语音输入
+ * 2. 语音消息
+ * 3. 语音识别
+ * 
+ * 注意事项：
+ * 1. 需要浏览器支持Web Audio API
+ * 2. 需要用户授权麦克风权限
+ * 3. 录音质量受设备麦克风影响
+ */
+
+
 import Recorder from 'js-audio-recorder';
 import Markdown from 'react-markdown';
 
@@ -28,7 +59,6 @@ export default function Chatbot(props: { showChatHistory: boolean }) {
     const [micRecording, setMicRecording] = useState(false);
     const [micRecordAlert, setmicRecordAlert] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
     const chatbotRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
@@ -89,6 +119,7 @@ export default function Chatbot(props: { showChatHistory: boolean }) {
                     let firstPart = audioText.slice(0, lastPuncIndex + 1);
                     let secondPart = audioText.slice(lastPuncIndex + 1);
                     console.log("tts:", firstPart);
+                    //TODO：为了让数字人发音
                     Comm.getInstance().tts(firstPart, settings).then(
                         (data: ArrayBuffer) => {
                             if (data) {
@@ -177,24 +208,9 @@ export default function Chatbot(props: { showChatHistory: boolean }) {
         console.log("file clicked");
     }
 
-    const sendClick = () => {
-        if (inputRef.current.value === "") return;
-        setIsProcessing(true);
-        chatWithAI(inputRef.current.value);
-        inputRef.current.value = "";
-    }
-
-    const enterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            sendClick();
-        }
-    }
-
-    // 定义一个防抖函数，用于处理 Ctrl + M 的按键组合  
     const handleCtrlM = debounce(() => {
-        console.log('Ctrl + M was pressed!');
         micClick();
-    }, 500); // 1000 毫秒内多次触发只执行一次   
+    }, 500);
 
     useEffect(() => {
         // 聊天滚动条到底部
@@ -244,7 +260,7 @@ export default function Chatbot(props: { showChatHistory: boolean }) {
 
             <div className="px-4 pt-4 mb-2 sm:mb-0 z-10 w-full">
                 <div className="relative flex">
-                    <div className="absolute inset-y-0 flex items-center">
+                    <div className="flex items-center justify-center w-full">
                         <button type="button" onClick={micClick} disabled={isProcessing} className={clsx(
                             "inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out hover:bg-gray-300 focus:outline-none",
                             micRecording ? "text-red-600" : "text-green-600",
@@ -260,20 +276,6 @@ export default function Chatbot(props: { showChatHistory: boolean }) {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z" />
                                     </svg>
                             }
-                        </button>
-                    </div>
-                    <input enterKeyHint="send" type="text" disabled={isProcessing} placeholder="Write your message!" ref={inputRef} onKeyDown={enterPress} className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3" />
-                    <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
-                        <button type="button" className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6 text-gray-600">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
-                            </svg>
-                        </button>
-                        <button type="button" onClick={sendClick} disabled={isProcessing} className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none">
-                            <span className="font-bold">Send</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-6 w-6 ml-2 transform rotate-90">
-                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                            </svg>
                         </button>
                     </div>
                 </div>

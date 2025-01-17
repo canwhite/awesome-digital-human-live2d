@@ -4,14 +4,14 @@ VERSION: "v0.0.1"
 PARAMETERS: [
   {
     NAME: "OPENAI_BASE_URL",
-    DEFAULT: "https://api.openai.com/v1"
+    DEFAULT: "https://api.deepseek.com/v1"
   },
   {
     NAME: "OPENAI_API_MODEL",
-    DEFAULT: "gpt-3.5-turbo"
+    DEFAULT: "deepseek-chat"
   },
   {
     NAME: "OPENAI_API_KEY",
-    DEFAULT: ""
+    DEFAULT: "--"
   }
 ]

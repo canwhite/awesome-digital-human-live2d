@@ -1,5 +1,31 @@
 import "whatwg-fetch";
 
+
+/**
+ * 这个文件主要包含与后端API交互的相关函数
+ * 
+ * 主要功能包括：
+ * 1. 获取服务器URL：通过环境变量或当前主机名构建服务器地址
+ * 2. WebSocket心跳检测：建立与服务器的WebSocket连接用于心跳检测
+ * 3. ASR语音识别接口：提供语音识别服务
+ * 
+ * 环境变量配置：
+ * - NEXT_PUBLIC_ADH_SERVER_PROTOCOL: 服务器协议 (http/https)
+ * - NEXT_PUBLIC_ADH_SERVER_PORT: 服务器端口
+ * - NEXT_PUBLIC_ADH_SERVER_VERSION: API版本
+ * - NEXT_PUBLIC_ADH_SERVER_IP: 服务器IP地址
+ * 
+ * 主要函数说明：
+ * - getURL(): 构建完整的服务器URL
+ * - get_heatbeat_wss(): 获取WebSocket心跳检测地址
+ * - asr_infer_api(): 语音识别API接口
+ * 
+ * 使用场景：
+ * 1. 需要与后端服务进行通信时
+ * 2. 需要进行语音识别处理时
+ * 3. 需要建立WebSocket长连接时
+ */
+
 const SERVER_PROTOCOL = process.env.NEXT_PUBLIC_ADH_SERVER_PROTOCOL || "http";
 const SERVER_PORT = process.env.NEXT_PUBLIC_ADH_SERVER_PORT || "8000";
 const VERSION = process.env.NEXT_PUBLIC_ADH_SERVER_VERSION || "v0";

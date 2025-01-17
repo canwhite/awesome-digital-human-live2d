@@ -46,7 +46,7 @@ export const BackImages: string[] = [
 export const ModelsDesc: string[] = [
   'Kei', 'Haru-1', 'Haru-2', 'Chitose', 'Mao', 'Miara', 'Tsumiki', 'Rice', 'Epsilon', 'Hibiki', 'Izumi', 'Shizuku', 'Hiyori'
 ];
-export const ModelDefault = 'Kei';
+export const ModelDefault = 'Mao';
 // 与外部定义文件（json）匹配
 export const MotionGroupIdle = 'Idle'; // 空闲
 export const MotionGroupTapBody = 'TapBody'; // 点击身体的时候

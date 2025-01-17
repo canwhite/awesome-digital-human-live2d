@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, ReactNode } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import { RadioGroup, Radio, Divider, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { RadioGroup, Radio, Input, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
 import { InteractionMode, useInteractionModeStore, useAgentModeStore, useAgentEngineSettingsStore, useMuteStore, useHeartbeatStore, useAudioAutoStopStore } from "@/app/lib/store";
 import { Comm } from "@/app/lib/comm";
 
